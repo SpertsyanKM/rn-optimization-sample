@@ -1,10 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {connect, shallowEqual} from 'react-redux';
 import {View} from 'react-native';
 import {NewsItemBodyComponent} from './newsItemBody';
 import {NewsItemTitleComponent} from './newsItemTitle';
 
 class NewsItemComponent extends React.Component<> {
+  shouldComponentUpdate(nextProps) {
+    return !shallowEqual(this.props.item, nextProps.item);
+  }
+
   render() {
     console.log('RENDER_NEWS_ITEM_' + this.props.itemKey);
     return (
