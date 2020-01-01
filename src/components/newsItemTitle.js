@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export class NewsItemTitleComponent extends React.Component<> {
+export class NewsItemTitle extends React.Component<> {
   render() {
     console.log('RENDER_NEWS_ITEM_TITLE_' + this.props.itemKey);
     return (

@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export class NewsItemBodyComponent extends React.PureComponent<> {
+export class NewsItemBody extends React.PureComponent<> {
   render() {
     console.log('RENDER_NEWS_ITEM_BODY_' + this.props.itemKey);
     return (
-      <View style={Styles.container}>
+      <View style={Styles.container} onPress={this.props.onPress}>
         <Text style={Styles.text}>{this.props.body}</Text>
       </View>
     );
