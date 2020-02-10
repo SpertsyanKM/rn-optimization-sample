@@ -2,7 +2,12 @@ import React from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
 import {NewsItem} from '../../components/newsItem';
 import {connect} from 'react-redux';
-import {loadNews, refreshNews} from '../../../thunkActions';
+import {
+  isLoadingNextPage,
+  loadNews,
+  loadNextPage,
+  refreshNews,
+} from '../../../thunkActions';
 
 class NewsScreenComponent extends React.Component<> {
   componentDidMount() {
@@ -14,8 +19,16 @@ class NewsScreenComponent extends React.Component<> {
     this.props.refreshNews();
   };
 
+  loadNextPage = () => {
+    if (!isLoadingNextPage) {
+      console.log('--------------[ LOADING NEXT PAGE ]--------------');
+      this.props.loadNextPage();
+    }
+  };
+
   render() {
     console.log('RENDER_NEWS_SCREEN');
+    const idList = this.props.newsIdList;
     return (
       <SafeAreaView>
         <FlatList
@@ -23,6 +36,7 @@ class NewsScreenComponent extends React.Component<> {
           renderItem={({item}) => <NewsItem itemKey={item} />}
           keyExtractor={item => item}
           onRefresh={this.refresh}
+          onEndReached={this.loadNextPage}
           refreshing={false}
         />
       </SafeAreaView>
@@ -32,6 +46,7 @@ class NewsScreenComponent extends React.Component<> {
 
 const mapStateToProps = state => ({
   newsIdList: state.newsIdList,
+  newsMap: state.newsMap,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -40,6 +55,9 @@ const mapDispatchToProps = dispatch => ({
   },
   refreshNews: () => {
     dispatch(refreshNews());
+  },
+  loadNextPage: () => {
+    dispatch(loadNextPage());
   },
 });
 

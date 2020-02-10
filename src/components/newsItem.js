@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {NewsItemBody} from './newsItemBody';
 import {NewsItemTitle} from './newsItemTitle';
 
@@ -14,7 +14,6 @@ class NewsItemComponent extends React.Component<> {
           itemKey={this.props.itemKey}
         />
         <NewsItemBody
-          style={[styles.body, styles.item]}
           body={this.props.item.body}
           onPress={this.props.expandBody}
           itemKey={this.props.itemKey}
@@ -29,11 +28,6 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = () => ({});
-
-const styles = StyleSheet.create({
-  body: {},
-  item: {},
-});
 
 export const NewsItem = connect(
   mapStateToProps,

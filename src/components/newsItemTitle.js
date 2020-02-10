@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 export class NewsItemTitle extends React.Component<> {
   render() {
-    console.log('RENDER_NEWS_ITEM_TITLE_' + this.props.itemKey);
+    // console.log('RENDER_NEWS_ITEM_TITLE_' + this.props.itemKey);
     return (
       <View>
         <Text style={Styles.text}>{this.props.title}</Text>
