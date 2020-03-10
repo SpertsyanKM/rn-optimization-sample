@@ -1,26 +1,26 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
 import {NewsItemBody} from './newsItemBody';
 import {NewsItemTitle} from './newsItemTitle';
 
-class NewsItemComponent extends React.Component<> {
-  render() {
-    console.log('RENDER_NEWS_ITEM_' + this.props.itemKey);
-    return (
-      <View>
-        <NewsItemTitle
-          title={this.props.item.title}
-          itemKey={this.props.itemKey}
-        />
-        <NewsItemBody
-          body={this.props.item.body}
-          onPress={this.props.expandBody}
-          itemKey={this.props.itemKey}
-        />
-      </View>
-    );
-  }
+function NewsItemComponent(props) {
+  console.log('RENDER_NEWS_ITEM_' + props.itemKey);
+  const {itemKey, onBodyPress} = props;
+  const onPressBody = useCallback(() => onBodyPress(itemKey), [
+    itemKey,
+    onBodyPress,
+  ]);
+  return (
+    <View>
+      <NewsItemTitle title={props.item.title} itemKey={itemKey} />
+      <NewsItemBody
+        body={props.item.body}
+        onPress={onPressBody}
+        itemKey={itemKey}
+      />
+    </View>
+  );
 }
 
 const mapStateToProps = (state, ownProps) => ({

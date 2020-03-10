@@ -14,13 +14,19 @@ class NewsScreenComponent extends React.Component<> {
     this.props.refreshNews();
   };
 
+  onItemBodyPress = itemKey => {
+    console.log('ITEM_BODY_PRESSED_' + itemKey);
+  };
+
   render() {
     console.log('RENDER_NEWS_SCREEN');
     return (
       <SafeAreaView>
         <FlatList
           data={this.props.newsIdList}
-          renderItem={({item}) => <NewsItem itemKey={item} />}
+          renderItem={({item}) => (
+            <NewsItem itemKey={item} onBodyPress={this.onItemBodyPress} />
+          )}
           keyExtractor={item => item}
           onRefresh={this.refresh}
           refreshing={false}
